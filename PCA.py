@@ -2,12 +2,6 @@
 # coding: utf-8
 
 # # PCA -  Principal Component Analysis
-# 
-# 
-# 
-# Bu dersimizde örnek olarak kullanacagimiz veri seti yapay ögrenme alaninin en popüler veri setlerinden “Iris” veri seti. Iris veri seti 3 Iris bitki türüne (Iris setosa, Iris virginica ve Iris versicolor) ait, her bir türden 50 örnek olmak üzere toplam 150 örnek sayisina sahip bir veri setidir. Her bir örnek için 4 özellik tanimlanmistir: taç yaprak uzunlugu, taç yaprak genisligi, çanak yaprak genisligi, çanak yaprak uzunluğu('sepal length','sepal width','petal length','petal width'). 
-# 
-# Veri setimizde, her bir bitki örnegi ayri bir gözlemi (örnegi) ifade ederken; bitki tür ismi bagimli(dependent) degisken, bitkilerin ölçülen 4 temel özelligi ise bagimsiz(independent) degiskenleri ifade eder.
 
 # In[1]:
 
@@ -19,7 +13,6 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 
 url = "pca_iris.data"
-# datasetimizi Pandas DataFrame içine yüklüyoruz..
 df = pd.read_csv(url, names=['sepal length','sepal width','petal length','petal width','target'])
 
 df
@@ -29,36 +22,25 @@ df
 
 
 features = ['sepal length', 'sepal width', 'petal length', 'petal width']
-# feature'ları x olarak ayıralım:
 x = df[features]
 
-# target'i y olarak ayıralım:
 y = df[['target']]
 
 
-# #### Değerleri Scale etmemiz gerekiyor. Çünkü her bir feature çok farklı boyutlarda ve bunların yapay zeka tarafından eşit ağırlıklarda dengelenmesi gerekiyor. Bu amaçla standart scaler  kullanarak tüm verileri mean = 0 and variance = 1 olacak şekilde değiştiriyoruz.
 
 # In[3]:
 
 
-# Standardizing the features
 x = StandardScaler().fit_transform(x)
 
 
 # In[4]:
 
 
-# Bakalım scale etmiş mi?
 x
 
 
-# ### PCA Projection 4 boyuttan - 2 boyuta
-# 
-# Orjinal verilerimiz 4 boyuta sahip: 'sepal length', 'sepal width', 'petal length', 'petal width'
-# 
-# Biz PCA yaparak bunları 2 boyuta indirgeyeceğiz ancak şunu belirtmeliyim ki PCA indirgeme işlemi sonucunda elde edeceğimiz 2 boyutun herhangi bir anlam ifade etmeyen başlıklara sahip olacak.. Yani 4 feature'dan 2 tanesini basit bir şekilde atmak değil yaptığımız..
-# 
-# 
+## PCA Projection 4 shape to 2 shape 
 
 # In[5]:
 
@@ -74,7 +56,6 @@ principalDf = pd.DataFrame(data = principalComponents, columns = ['principal com
 principalDf
 
 
-# ### Şimdi en son target sütunumuzu da PCA dataframe'imizin sonuna ekleyelim:
 
 # In[7]:
 
@@ -94,9 +75,7 @@ final_dataframe.head()
 
 
 
-# ### Son olarak da final dataframe'imizi görselleştirip bakalım:
 
-# Basit bir çizim yapalım:
 
 # In[9]:
 
@@ -112,7 +91,6 @@ plt.scatter(dfvirginica['principal component 1'], dfvirginica['principal compone
 plt.scatter(dfversicolor['principal component 1'], dfversicolor['principal component 2'],color='blue')
 
 
-# ### Daha profesyonel bir plotting yapalım:
 
 # In[10]:
 
